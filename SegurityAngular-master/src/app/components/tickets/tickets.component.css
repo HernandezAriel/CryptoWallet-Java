@@ -1,0 +1,44 @@
+:root{
+    --dark: #16191c;
+    --darl-x: #1e2126;
+    --light: #FFFFFF;
+    --green:#00BD82;
+}
+body{
+    font-family: 'League Spartan', sans-serif;
+    font-weight: 300;
+    color: var(--light);
+}
+.bg-dark{
+    background-color: var(--dark) !important;
+}
+.bg-dark-x{
+    background-color: var(--darl-x);
+}
+.form-control, .btn{
+    min-height: 3.125rem;
+    line-height: initial;
+    
+}
+.btn{
+    background-color: #00BD82; 
+}
+.form-text{
+    color: var(--light);
+}
+.navbar{
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: #00BD82;
+}
+.d-block{
+    height: auto;
+
+}
+.container{
+    text-align: center;
+    
+
+}
+.h2{
+    padding-bottom: 1%;
+}

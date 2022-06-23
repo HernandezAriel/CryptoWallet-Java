@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile</title>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body class="body">
+    <header>
+      <app-header></app-header>
+    </header>
+    <div class="d-flex justify-content-center mt-4">
+      Wallet Adress: {{wallet.id}}
+    </div>
+     
+
+    <div class="container">
+      <div
+        class="btn-group d-flex justify-content-center mt-5 mb-5"
+        role="group"
+        aria-label="Basic example"
+      >
+        <button
+          class="btn gap-1 btn btn-outline-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#buyToken"
+        >
+          <i class="fa-solid fa-pen"></i>Buy
+        </button>
+
+        <button
+          class="btn gap-1 btn btn-outline-danger"
+          data-bs-toggle="modal"
+          data-bs-target="#sellToken"
+        >
+          <i class="fa-solid fa-pen"></i>Sell
+        </button>
+
+        <button
+          class="btn gap-1 btn btn-outline-success"
+          data-bs-toggle="modal"
+          data-bs-target="#exchangeToken"
+        >
+          <i class="fa-solid fa-pen"></i>Exchange
+        </button>
+
+        <button
+          class="btn gap-1 btn btn-outline-warning"
+          data-bs-toggle="modal"
+          data-bs-target="#transferToken"
+        >
+          <i class="fa-solid fa-pen"></i>Transfer
+        </button>
+
+        <button
+          class="btn gap-1 btn btn-outline-success"
+          data-bs-toggle="modal"
+          data-bs-target="#addToken"
+        >
+          <i class="fa-solid fa-pen"></i>Add Token
+        </button>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">NAME</th>
+            <th scope="col">AMOUNT</th>
+            <th scope="col">AMOUNT IN ARS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of wallet.token_wallet">
+            <td>{{ c.tokenName }}</td>
+            <td>{{ c.amount_tokens }}</td>
+            <td>{{ c.valor_total }} ARS</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+
+  <!-- modal comprar tokens -->
+  <div
+    class="modal fade"
+    id="buyToken"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Comprar Token</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="buyToken(ticket)">
+            <div class="form-group">
+              <label>Amount to buy:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="amount to buy"
+                [(ngModel)]="ticket.amount"
+                name="empresa"
+              />
+              <div class="mt-4">
+                <label>Select Token Name</label>
+                <select [(ngModel)]="ticket.name_token" name="tokenName" class="form-select">
+                  <option
+                    *ngFor="let c of wallet.token_wallet"
+                    [value]="c.tokenName"
+                  >
+                    {{ c.tokenName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+              <button type="submit" class="btn btn-primary btn-lg btn-block" data-bs-dismiss="modal">Buy</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal vender tokens -->
+  <div
+    class="modal fade"
+    id="sellToken"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Sell Token</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="sellToken(ticket)">
+            <div class="form-group">
+              <label>Amount To Sell:</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="amount to sell"
+                [(ngModel)]="ticket.amount"
+                name="empresa"
+              />
+              <div class="mt-4">
+                <label>Select Token Name</label>
+                <select [(ngModel)]="ticket.name_token" name="tokenName" class="form-select">
+                  <option
+                    *ngFor="let c of wallet.token_wallet"
+                    [value]="c.tokenName"
+                  >
+                    {{ c.tokenName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+              >
+                Sell
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal cambiar tokens -->
+  <div
+    class="modal fade"
+    id="exchangeToken"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Exchange tokens</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="exchangeToken(exchange)">
+            <div class="mt-4">
+              <label>Select The Token You Want to Change</label>
+              <select [(ngModel)]="exchange.tokenName1" name="tokenName" class="form-select mb-4">
+                <option
+                  *ngFor="let c of wallet.token_wallet"
+                  [value]="c.tokenName"
+                >
+                  {{ c.tokenName }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Amount to exchange:</label>
+              <input
+                type="text"
+                class="form-control mb-4 "
+                placeholder="amount to exchange"
+                [(ngModel)]="exchange.amount"
+                name="empresa"
+              />
+            </div>
+            <div class="mt-4">
+              <label>Select The Token You Want</label>
+              <select [(ngModel)]="exchange.tokenName2" name="tokenName" class="form-select">
+                <option
+                  *ngFor="let c of wallet.token_wallet"
+                  [value]="c.tokenName"
+                >
+                  {{ c.tokenName }}
+                </option>
+              </select>
+            </div>
+            <br />
+            <br />
+            <div class="row mb-3">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+              >
+                Exchange
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal transfer -->
+  <div
+    class="modal fade"
+    id="transferToken"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Transfer Tokens</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="transferToken()">
+            <div>
+              <label>Select Token Name</label>
+              <select [(ngModel)]="transferToken1.tokenName" name="tokenName" class="form-select mb-4">
+                <option
+                  *ngFor="let c of wallet.token_wallet"
+                  [value]="c.tokenName"
+                >
+                  {{ c.tokenName }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Amount To Transfer</label>
+              <input
+                type="text"
+                class="form-control mb-4"
+                placeholder="amount to transfer"
+                [(ngModel)]="transferToken1.amount"
+                name="empresa"
+              />
+            </div>
+            <div class="form-group">
+              <label>Wallet To Transfer:</label>
+              <input
+                type="text"
+                class="form-control mb-4"
+                placeholder="wallet to transfer"
+                [(ngModel)]="transferToken1.receptorWalletId"
+                name="empresa"
+              />
+            </div>
+            <div class="row mb-3">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg btn-block"
+              data-bs-dismiss="modal"
+            >
+              Transfer
+            </button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal agregar token a la lista -->
+  <div
+    class="modal fade"
+    id="addToken"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="exampleModalLabel">Add Token</h4>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="addToken(token1)">
+            <div class="form-group">
+              <div>
+                <label class="mb-3">Select Token Name</label>
+                <select [(ngModel)]="token1" name="tokenName" class="form-select mb-4">
+                  <option *ngFor="let t of tokens" [value]="t">
+                    {{ t }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <br />
+            <div class="row mb-3">
+              <button
+                type="submit"
+                class="btn btn-primary btn-lg btn-block"
+                data-bs-dismiss="modal"
+              >
+                Add Token
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</html>

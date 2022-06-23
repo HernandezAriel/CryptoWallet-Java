@@ -1,0 +1,22 @@
+export class Exchange
+{
+    id_wallet:number;
+    priceToken1:number;
+    tokenName1:string;
+    amount:number;
+    priceToken2:number;
+    tokenName2:string;
+    constructor(id_wallet:number,
+        priceToken1:number,
+        tokenName1:string,
+        amount:number,
+        priceToken2:number,
+        tokenName2:string,){
+            this.amount=amount;
+            this.id_wallet=id_wallet;
+            this.priceToken1=priceToken1;
+            this.priceToken2=priceToken2;
+            this.tokenName1=tokenName1;
+            this.tokenName2=tokenName2;
+        }
+} 

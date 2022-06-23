@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="login.component.css">
+  <!--font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@300&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/512f79550e.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-dark-x">
+  <section>
+    <div class="row g-0">
+      <!--carrousel-->
+      <div class="col-lg-7">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img src="../assets/cryptocurrency.webp" class="d-block mw-100 vh-100" alt="...">
+            </div>
+            <div class="carousel-item">
+              <img src="../assets/illustration.webp" class="d-block mw-100 vh-100" alt="...">
+            </div>
+          </div>
+        </div>
+        <!--fin-->
+      </div>
+      <div class="col-lg-5 d-flex flex-column align-items-end min-vh-100">
+        <div class="px-lg-5 pt-lg-4 pb-lg-3 p-4 w-100 nb-auto">
+
+        </div>
+        <div class="px-lg5 py-lg-4 p-4 w-100 align-self-center">
+          <h1 class="font-weight-bold mb-4"><img src="../assets/brujito.png" class="img-fluid" width="100"
+              height="100">Welcome</h1>
+          <form [formGroup]="form" class="mb-5" (ngSubmit)="onSend($event)">
+            <div class="mb-4">
+
+              <label for="exampleInputEmail1" class="form-label font-weight-bold ">Username</label>
+              <input type="text" formControlName="username" class="form-control bg-dark-x border-0"
+                placeholder="Enter your username" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <!-- para que me tire warnings en caso de mal formulario -->
+              <div *ngIf="Username?.errors &&Username?.touched">
+                <p *ngIf="Username?.hasError('required')" class="text-danger">
+                  The username is required.
+                </p>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="password" class="form-label font-weight-bold">Password</label>
+
+              <input type="password" formControlName="password" class="form-control bg-dark-x border-0 mb-2"
+                placeholder="Enter your password" id="password">
+
+              <div *ngIf="Password?.errors && Password?.touched">
+                <p *ngIf="Password?.hasError('required')" class="text-danger">
+                  The password is required.
+                </p>
+                <p *ngIf="Password?.errors" class="text-danger">
+                  The password need to have at least 3 characters.
+                </p>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Log in</button>
+          </form>
+          <div class="d-flex justify-content-around w-100 mt-auto">
+            <button type="submit" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#singIn"> <i
+                class="fa-brands fa-google lead mr-2"></i> Sign up</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+</body>
+<!-- MODAL SIGN IN  -->
+<div class="modal fade" id="singIn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLabel">Sing in</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addUser(user)">
+          <div class="form-group">
+            <label>Username:</label>
+            <input type="text" class="form-control" placeholder="username" [(ngModel)]="user.username" name="empresa" />
+            <label>Password:</label>
+            <input type="text" class="form-control" placeholder="password" [(ngModel)]="user.password" name="empresa" />
+          </div>
+          <br> <br>
+          <div class="row mb-3">
+            <button type="submit" class="btn btn-primary  col-3 mb-3" data-bs-dismiss="modal">
+              Sign up
+            </button>
+            <div class="col-6 mb-6"></div>
+            <button type="button" class="btn btn-danger col-3 mb-3" data-bs-dismiss="modal">
+              Close
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>
